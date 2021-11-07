@@ -1,64 +1,48 @@
 const Band = require("./band");
 
-
 class BandList {
-    
-    constructor() {
+  constructor() {
+    this.bands = [
+      new Band("Metalica"),
+      new Band("Héroes del Silencio"),
+      new Band("Bon Jovi"),
+      new Band("Breaking Benjamin"),
+    ];
+  }
 
-        this.bands = [
-            new Band('Metalica'),
-            new Band('Héroes del Silencio'),
-            new Band('Bon Jovi'),
-            new Band('Breaking Benjamin'),
-        ]
-    }
+  addBand(name) {
+    const newBand = new Band(name);
+    this.bands.push(newBand);
+    return this.bands;
+  }
 
-    addBand( name ) {
-        
-        const newBand = new Band( name );
-        this.bands.push( newBand );
-        return this.bands;
-    }
+  removeBand(id) {
+    this.bands = this.bands.filter((band) => band.id !== id);
+  }
 
-    removeBand( id ) {
-        this.bands = this.bands.filter( band => band.id !== id );
-    }
+  getBands() {
+    return this.bands;
+  }
 
-    getBands() { 
-        return this.bands;
-    }
+  increaseVotes(id) {
+    this.bands = this.bands.map((band) => {
+      if (band.id === id) {
+        band.votes += 1;
+      }
 
-    increaseVotes( id ) {
-        this.bands = this.bands.map( band => { 
+      return band;
+    });
+  }
 
-            if ( band.id === id ) {
-                
-                band.votes += 1;
+  changeName(id, newName) {
+    this.bands = this.bands.map((band) => {
+      if (band.id === id) {
+        band.name = newName;
+      }
 
-            }
-
-            return band;
-
-        }); 
-
-    }
-
-    changeName( id, newName ) {
-        this.bands = this.bands.map( band => { 
-
-            if ( band.id === id ) {
-                band.name = newName;
-            }
-
-            return band;
-
-        }); 
-
-    }
-
-
-
+      return band;
+    });
+  }
 }
-
 
 module.exports = BandList;
